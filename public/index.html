@@ -9,12 +9,12 @@
 <!-- コンテンツ表示画面 -->
 
 <div>
-    <div> 名前：<input type="text" id=""> </div>
+    <div> 名前：<input type="text" id="uname"> </div>
     <div>
-        <textarea id="" cols="30" rows="10"></textarea>
-        <button id="">送信</button>
+        <textarea id="text" cols="30" rows="10"></textarea>
+        <button id="send">送信</button>
     </div>
-    <div id="output"></div>
+    <div id="output" style="overflow: auto; height: 300px;"></div>
 </div>
 <!--/ コンテンツ表示画面 -->
 
@@ -30,6 +30,8 @@
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getDatabase, ref, push, set, onChildAdded, remove,onChildRemoved }
+  from "https://www.gstatic.com/firebasejs/9.1.0/firebase-datebase.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -45,7 +47,17 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app); //RealtimeDBに接続
+  const dbRef = ref(db,"chat"); //RealtimeDB内の"chat"を使う
 </script>
+
+//送信
+$("#send").on("click",function(){
+  const uname = $("#uname").val();
+  const text = $("#text").val();
+  alert(uname + text); //取得確認
+
+});
 
 
 
