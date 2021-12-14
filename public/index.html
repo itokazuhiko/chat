@@ -50,10 +50,15 @@
   const dbRef = ref(db,"chat"); //RealtimeDB内の"chat"を使う
 
   //送信
-$("#send").on("click",function(){
-  const uname = $("#uname").val();
-  const text = $("#text").val();
-  console.log(uname + text); //取得確認
+  $("#send").on("click",function() {
+    const msg = {
+        uname: $("#uname").val(),
+        text: $("#text").val()
+    }
+    const newPostRef = push(dbRef); //ユニークKEYを生成
+    set(newPostRef, msg);           //"chat"にユニークKEYをつけてオブジェクトデータを登録
+});
+  
 
 });
 
